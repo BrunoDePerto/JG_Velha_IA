@@ -29,7 +29,7 @@ public class MiniMax implements Regras {
         tabuleiroPar = verificarJogada(tabuleiroPar);
         for(int i=0; i<tabuleiroPar.length; i++){
             System.out.print(tabuleiroPar[i] + " ");
-            if(i == 2 || i == 5)
+            if(i == 2 || i == 5);
         }
         System.out.println(Arrays.toString(tabuleiroPar));
     }
