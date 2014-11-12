@@ -21,5 +21,4 @@ public abstract class MiniMax {
         return posicoesGanhadoras;
     }
     
-    public int[]
 }
