@@ -2,7 +2,7 @@ package jogodavelha;
 
 public interface Regras {
 
-    public char[] verificarJogada(char tabuleiro[]);
+    public char[] efetuarJogada(char tabuleiro[]);
     public char[] novoJogo(char tabuleiro[]);
     public boolean verificarSePerdeu(char tabuleiro[]);
     public char[] verificarSePodeGanhar(char tabuleiro[]);
@@ -10,4 +10,5 @@ public interface Regras {
     public char[] escolherPosicaoComChanceDeGanhar(char tabuleiro[]);
     public char[] bloquearPosicaoComChanceDePerto(char tabuleiro[]);
     public char[] escolherMelhorPosicao(char tabuleiro[]);
+    
 }
