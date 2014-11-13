@@ -41,11 +41,9 @@ public class IA extends MiniMax implements Regras {
         }
         //Verifica as posicoes vagas
         int[] posicoesVagas = getPosicoesVagas(tabuleiro);
-        for(int posicaoVaga : posicoesVagas)
-            System.out.println(posicaoVaga);
         //Executa o minimax
-        /*int [][]melhoresEscolhas = 
-                miniMax(tabuleiro, posicoesVagas.toArray());
+        int [][]melhoresEscolhas = 
+                miniMax(tabuleiro, posicoesVagas);
         //verifica se pode ganhar
         int melhorValor = 0;
         for(int i=0; i<melhoresEscolhas.length; i++){
@@ -59,7 +57,7 @@ public class IA extends MiniMax implements Regras {
         //escolher uma boa posicao
         if(verificarSePodeGanhar(tabuleiro) != null){
             
-        }*/
+        }
         this.tabuleiro = tabuleiro;
         return this.tabuleiro;
     }
