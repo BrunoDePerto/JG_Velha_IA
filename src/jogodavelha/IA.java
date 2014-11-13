@@ -20,8 +20,8 @@ public class IA extends MiniMax implements Regras {
     }
 
     public void teste() {
-        setNovoJogo(true);
-        char tabuleiroPar[] = {' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' '};
+        setNovoJogo(false);
+        char tabuleiroPar[] = {'O', 'O', ' ', 'X', ' ', ' ', 'X', ' ', ' '};
         tabuleiroPar = efetuarJogada(tabuleiroPar);
         for(int i=0; i<tabuleiroPar.length; i++){
             System.out.print(tabuleiroPar[i] + " ");
@@ -40,17 +40,26 @@ public class IA extends MiniMax implements Regras {
             System.out.println("Perdeu");
         }
         //Verifica as posicoes vagas
-        List<Integer> posicoesVagas = getPosicoesVagas(tabuleiro);
+        int[] posicoesVagas = getPosicoesVagas(tabuleiro);
+        for(int posicaoVaga : posicoesVagas)
+            System.out.println(posicaoVaga);
         //Executa o minimax
-        
+        /*int [][]melhoresEscolhas = 
+                miniMax(tabuleiro, posicoesVagas.toArray());
         //verifica se pode ganhar
+        int melhorValor = 0;
+        for(int i=0; i<melhoresEscolhas.length; i++){
+            if(melhoresEscolhas[i][1] > melhorValor)
+                melhorValor = melhoresEscolhas[i][1];
+        }
+        System.out.println(melhorValor);
         //bloquear jogador
         //escolher melhor posicao com chance de ganhar
         //nao deixar jogador escolher posicao com chance de ganhar
         //escolher uma boa posicao
         if(verificarSePodeGanhar(tabuleiro) != null){
             
-        }
+        }*/
         this.tabuleiro = tabuleiro;
         return this.tabuleiro;
     }
@@ -108,13 +117,17 @@ public class IA extends MiniMax implements Regras {
         return tabuleiro;
     }
     
-    public List<Integer> getPosicoesVagas(char[] tabuleiro){
-        List<Integer> posicoesVagas = new ArrayList<>();
+    public int[] getPosicoesVagas(char[] tabuleiro){
+        int [] posicoesVagasTemp = new int[9];
+        int controle = 0;
         for(int i=0; i < tabuleiro.length; i++){
             if(tabuleiro[i] == ' '){
-                posicoesVagas.add(i);
+                posicoesVagasTemp[controle] = i;
+                controle++;
             }
         }
+        int [] posicoesVagas = new int[controle];
+        System.arraycopy(posicoesVagasTemp, 0, posicoesVagas, 0, posicoesVagas.length);
         return posicoesVagas;
     }
 
