@@ -21,4 +21,8 @@ public abstract class MiniMax {
         return posicoesGanhadoras;
     }
     
+    public int[][] miniMax(char[] tabuleiro, int opcao){
+        return null;
+    }
+    
 }

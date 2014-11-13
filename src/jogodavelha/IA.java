@@ -1,5 +1,8 @@
 package jogodavelha;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IA extends MiniMax implements Regras {
 
     private char tabuleiro[];
@@ -17,8 +20,8 @@ public class IA extends MiniMax implements Regras {
     }
 
     public void teste() {
-        novoJogo = false;
-        char tabuleiroPar[] = {'X', 'O', ' ', 'O', 'X', 'O', 'X', ' ', 'X'};
+        setNovoJogo(true);
+        char tabuleiroPar[] = {' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' '};
         tabuleiroPar = efetuarJogada(tabuleiroPar);
         for(int i=0; i<tabuleiroPar.length; i++){
             System.out.print(tabuleiroPar[i] + " ");
@@ -36,6 +39,15 @@ public class IA extends MiniMax implements Regras {
         if(verificarSePerdeu(tabuleiro)){
             System.out.println("Perdeu");
         }
+        //Verifica as posicoes vagas
+        List<Integer> posicoesVagas = getPosicoesVagas(tabuleiro);
+        //Executa o minimax
+        
+        //verifica se pode ganhar
+        //bloquear jogador
+        //escolher melhor posicao com chance de ganhar
+        //nao deixar jogador escolher posicao com chance de ganhar
+        //escolher uma boa posicao
         if(verificarSePodeGanhar(tabuleiro) != null){
             
         }
@@ -94,6 +106,16 @@ public class IA extends MiniMax implements Regras {
     @Override
     public char[] escolherMelhorPosicao(char[] tabuleiro) {
         return tabuleiro;
+    }
+    
+    public List<Integer> getPosicoesVagas(char[] tabuleiro){
+        List<Integer> posicoesVagas = new ArrayList<>();
+        for(int i=0; i < tabuleiro.length; i++){
+            if(tabuleiro[i] == ' '){
+                posicoesVagas.add(i);
+            }
+        }
+        return posicoesVagas;
     }
 
     public void setPoda(boolean poda) {
