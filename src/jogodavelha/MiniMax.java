@@ -23,27 +23,29 @@ public abstract class MiniMax {
 
     public int[][] miniMax(char[] tabuleiro, int[] posicoesVagas) {
         int[][] melhoresEscolhas
-                = new int[posicoesVagas.length][2];
+                = new int[posicoesVagas.length][3];
         for (int i = 0; i < melhoresEscolhas.length; i++) {
             melhoresEscolhas[i][0] = posicoesVagas[i];
-            melhoresEscolhas[i][1] = miniMax(tabuleiro, posicoesVagas[i], 0, 0);
+            melhoresEscolhas[i][1] = miniMax(tabuleiro, posicoesVagas[i], 0, 0, 'O');
+            melhoresEscolhas[i][2] = miniMax(tabuleiro, posicoesVagas[i], 0, 0, 'X');
         }
         return melhoresEscolhas;
     }
 
-    public int miniMax(char[] tabuleiro, int posicao, int opcao, int valor) {
+    public int miniMax(char[] tabuleiro, int posicao, int opcao, int valor, char jogador) {
         int valorTemp = 0;
         if (opcao == posicoesGanhadoras.length) {
             return valor;
         }
         if (tabuleiro[posicoesGanhadoras[opcao][0]] == 'O'
-                || posicoesGanhadoras[opcao][0] == posicao) {
+                || posicoesGanhadoras[opcao][0] == posicao && jogador == 'O') {
             valorTemp = 1;
-        } else if (tabuleiro[posicoesGanhadoras[opcao][0]] == 'X') {
-            valorTemp = 1;
+        } else if (tabuleiro[posicoesGanhadoras[opcao][0]] == 'X'
+                || posicoesGanhadoras[opcao][0] == posicao && jogador == 'X') {
+            valorTemp = -1;
         }
         if (tabuleiro[posicoesGanhadoras[opcao][1]] == 'O'
-                || posicoesGanhadoras[opcao][1] == posicao) {
+                || posicoesGanhadoras[opcao][1] == posicao && jogador == 'O') {
             if (valorTemp == 1) {
                 valorTemp = 10;
             } else if (valorTemp == -1) {
@@ -51,7 +53,8 @@ public abstract class MiniMax {
             } else {
                 valorTemp = 1;
             }
-        } else if (tabuleiro[posicoesGanhadoras[opcao][1]] == 'X') {
+        } else if (tabuleiro[posicoesGanhadoras[opcao][1]] == 'X'
+                || posicoesGanhadoras[opcao][1] == posicao && jogador == 'X') {
             if (valorTemp == -1) {
                 valorTemp = -10;
             } else if (valorTemp == 1) {
@@ -61,7 +64,7 @@ public abstract class MiniMax {
             }
         }
         if (tabuleiro[posicoesGanhadoras[opcao][2]] == 'O'
-                || posicoesGanhadoras[opcao][2] == posicao) {
+                || posicoesGanhadoras[opcao][2] == posicao && jogador == 'O') {
             if (valorTemp > 0) {
                 valorTemp *= 10;
             } else if (valorTemp < 0) {
@@ -69,7 +72,8 @@ public abstract class MiniMax {
             } else {
                 valorTemp = 1;
             }
-        } else if (tabuleiro[posicoesGanhadoras[opcao][2]] == 'X') {
+        } else if (tabuleiro[posicoesGanhadoras[opcao][2]] == 'X'
+                || posicoesGanhadoras[opcao][2] == posicao && jogador == 'X') {
             if (valorTemp < 0) {
                 valorTemp *= 10;
             } else if (valorTemp > 1) {
@@ -77,8 +81,9 @@ public abstract class MiniMax {
             } else {
                 valorTemp = -1;
             }
+
         }
         valor += valorTemp;
-        return miniMax(tabuleiro, posicao, opcao + 1, valor);
+        return miniMax(tabuleiro, posicao, opcao + 1, valor, jogador);
     }
 }

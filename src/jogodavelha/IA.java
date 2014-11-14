@@ -17,7 +17,10 @@ public class IA extends MiniMax implements Regras {
 
     public void teste() {
         setNovoJogo(false);
-        char tabuleiroPar[] = {'O', ' ', 'X', 'O', ' ', 'X', 'X', ' ', ' '};
+        char tabuleiroPar[] = {
+            'X', 'X', 'O', 
+            ' ', ' ', 'X', 
+            ' ', 'O', ' '};
         tabuleiroPar = efetuarJogada(tabuleiroPar);
         for (int i = 0; i < tabuleiroPar.length; i++) {
             System.out.print(tabuleiroPar[i] + " ");
@@ -48,12 +51,17 @@ public class IA extends MiniMax implements Regras {
         //Executa o minimax
         int[][] melhoresEscolhas
                 = miniMax(this.tabuleiro, posicoesVagas);
-        //verifica se pode ganhar
+//        for(int[]melhorOpcao : melhoresEscolhas){
+//            System.out.println("Posicao: " + melhorOpcao[0] 
+//                    + ", melhorEscolha: " + melhorOpcao[1]
+//                    + ", piorEscolha: " + melhorOpcao[2]);
+//        }
+        //Verifica se pode ganhar
         if(verificarSePodeGanhar(this.tabuleiro, melhoresEscolhas)){
             System.out.println("Ganhou");
             return this.tabuleiro;
         }
-        //bloquear jogador
+        //Bloquear jogador
         if(bloquearJogador(this.tabuleiro, melhoresEscolhas)){
             System.out.println("Perderia");
             return this.tabuleiro;
@@ -118,9 +126,9 @@ public class IA extends MiniMax implements Regras {
     public boolean bloquearJogador(char[] tabuleiro, int[][] melhoresEscolhas) {
         int piorValor = 1000, piorPosicao = 1000;
         for (int[] melhoresEscolha : melhoresEscolhas) {
-            if (melhoresEscolha[1] <= piorValor) {
+            if (melhoresEscolha[2] < piorValor) {
                 piorPosicao = melhoresEscolha[0];
-                piorValor = melhoresEscolha[1];
+                piorValor = melhoresEscolha[2];
             }
         }
         char[] tabuleiroTemp = new char[tabuleiro.length];
@@ -136,15 +144,15 @@ public class IA extends MiniMax implements Regras {
 
     @Override
     public boolean jogarNaMelhorPosicao(char tabuleiro[], int[][] melhoresEscolhas){
-        int melhorValor = 0, melhorPosicao = 0;
+        int melhorValor = -1000, melhorPosicao = -1000;
         for (int[] melhoresEscolha : melhoresEscolhas) {
             if (melhoresEscolha[1] > melhorValor) {
                 melhorPosicao = melhoresEscolha[0];
                 melhorValor = melhoresEscolha[1];
             }
         }
-        tabuleiro[melhorPosicao] = 'O';
-        return false;
+        this.tabuleiro[melhorPosicao] = 'O';
+        return true;
     }
     
     public int[] getPosicoesVagas(char[] tabuleiro) {
