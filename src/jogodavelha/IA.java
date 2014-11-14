@@ -11,7 +11,6 @@ public class IA extends MiniMax implements Regras {
     private int totalNosAberto;
     private String ganhador;
     private boolean novoJogo;
-   
 
     public IA() {
         tabuleiro = new char[9];
@@ -23,10 +22,11 @@ public class IA extends MiniMax implements Regras {
         setNovoJogo(false);
         char tabuleiroPar[] = {'O', 'O', ' ', 'X', ' ', ' ', 'X', ' ', ' '};
         tabuleiroPar = efetuarJogada(tabuleiroPar);
-        for(int i=0; i<tabuleiroPar.length; i++){
+        for (int i = 0; i < tabuleiroPar.length; i++) {
             System.out.print(tabuleiroPar[i] + " ");
-            if(i == 2 || i == 5)
+            if (i == 2 || i == 5) {
                 System.out.println("");
+            }
         }
     }
 
@@ -36,27 +36,31 @@ public class IA extends MiniMax implements Regras {
         if (novoJogo) {
             tabuleiro = novoJogo(tabuleiro);
         }
-        if(verificarSePerdeu(tabuleiro)){
+        if (verificarSePerdeu(tabuleiro)) {
             System.out.println("Perdeu");
         }
         //Verifica as posicoes vagas
         int[] posicoesVagas = getPosicoesVagas(tabuleiro);
         //Executa o minimax
-        int [][]melhoresEscolhas = 
-                miniMax(tabuleiro, posicoesVagas);
+        int[][] melhoresEscolhas
+                = miniMax(tabuleiro, posicoesVagas);
         //verifica se pode ganhar
-        int melhorValor = 0;
-        for(int i=0; i<melhoresEscolhas.length; i++){
-            if(melhoresEscolhas[i][1] > melhorValor)
+        int melhorValor = 0, melhorPosicao = 0;
+        for (int i = 0; i < melhoresEscolhas.length; i++) {
+            System.out.println(melhoresEscolhas[i][1]);
+            if (melhoresEscolhas[i][1] > melhorValor) {
+                melhorPosicao = melhoresEscolhas[i][0];
                 melhorValor = melhoresEscolhas[i][1];
-        }
-        System.out.println(melhorValor);
+            }
+            
+       }
+        System.out.println("Posição: " + melhorPosicao + ", Valor: " + melhorValor);
         //bloquear jogador
         //escolher melhor posicao com chance de ganhar
         //nao deixar jogador escolher posicao com chance de ganhar
         //escolher uma boa posicao
-        if(verificarSePodeGanhar(tabuleiro) != null){
-            
+        if (verificarSePodeGanhar(tabuleiro) != null) {
+
         }
         this.tabuleiro = tabuleiro;
         return this.tabuleiro;
@@ -88,8 +92,9 @@ public class IA extends MiniMax implements Regras {
                     placar++;
                 }
             }
-            if(placar == 3)
+            if (placar == 3) {
                 return true;
+            }
             placar = 0;
         }
         return false;
@@ -114,17 +119,17 @@ public class IA extends MiniMax implements Regras {
     public char[] escolherMelhorPosicao(char[] tabuleiro) {
         return tabuleiro;
     }
-    
-    public int[] getPosicoesVagas(char[] tabuleiro){
-        int [] posicoesVagasTemp = new int[9];
+
+    public int[] getPosicoesVagas(char[] tabuleiro) {
+        int[] posicoesVagasTemp = new int[9];
         int controle = 0;
-        for(int i=0; i < tabuleiro.length; i++){
-            if(tabuleiro[i] == ' '){
+        for (int i = 0; i < tabuleiro.length; i++) {
+            if (tabuleiro[i] == ' ') {
                 posicoesVagasTemp[controle] = i;
                 controle++;
             }
         }
-        int [] posicoesVagas = new int[controle];
+        int[] posicoesVagas = new int[controle];
         System.arraycopy(posicoesVagasTemp, 0, posicoesVagas, 0, posicoesVagas.length);
         return posicoesVagas;
     }
@@ -148,10 +153,9 @@ public class IA extends MiniMax implements Regras {
     public boolean isNovoJogo() {
         return novoJogo;
     }
-    
+
     public void setNovoJogo(boolean novoJogo) {
         this.novoJogo = novoJogo;
     }
-
 
 }
