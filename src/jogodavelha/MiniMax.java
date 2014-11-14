@@ -23,7 +23,7 @@ public abstract class MiniMax {
 
     public int[][] miniMax(char[] tabuleiro, int[] posicoesVagas) {
         int[][] melhoresEscolhas
-                = new int[posicoesVagas.length][posicoesVagas.length];
+                = new int[posicoesVagas.length][2];
         for (int i = 0; i < melhoresEscolhas.length; i++) {
             melhoresEscolhas[i][0] = posicoesVagas[i];
             melhoresEscolhas[i][1] = miniMax(tabuleiro, posicoesVagas[i], 0, 0);
@@ -79,6 +79,6 @@ public abstract class MiniMax {
             }
         }
         valor += valorTemp;
-        return miniMax(tabuleiro, posicao, opcao+1, valor);
+        return miniMax(tabuleiro, posicao, opcao + 1, valor);
     }
 }
