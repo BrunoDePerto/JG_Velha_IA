@@ -17,7 +17,7 @@ public class IA extends MiniMax implements Regras {
 
     public void teste() {
         setNovoJogo(false);
-        char tabuleiroPar[] = {'O', ' ', ' ', 'O', ' ', 'X', 'X', ' ', ' '};
+        char tabuleiroPar[] = {'O', ' ', 'X', 'O', ' ', 'X', 'X', ' ', ' '};
         tabuleiroPar = efetuarJogada(tabuleiroPar);
         for (int i = 0; i < tabuleiroPar.length; i++) {
             System.out.print(tabuleiroPar[i] + " ");
@@ -58,11 +58,11 @@ public class IA extends MiniMax implements Regras {
             System.out.println("Perderia");
             return this.tabuleiro;
         }
-        //escolher melhor posicao com chance de ganhar
-        
-        //nao deixar jogador escolher posicao com chance de ganhar
-        //escolher uma boa posicao
-
+        //jogar na melhor posicao
+        if(jogarNaMelhorPosicao(tabuleiro, melhoresEscolhas)){
+            System.out.println("Jogou na melhor opção");
+            return this.tabuleiro;
+        }
         return this.tabuleiro;
     }
 
@@ -135,21 +135,18 @@ public class IA extends MiniMax implements Regras {
     }
 
     @Override
-    public boolean escolherPosicaoComChanceDeGanhar(char[] tabuleiro) {
-        
+    public boolean jogarNaMelhorPosicao(char tabuleiro[], int[][] melhoresEscolhas){
+        int melhorValor = 0, melhorPosicao = 0;
+        for (int[] melhoresEscolha : melhoresEscolhas) {
+            if (melhoresEscolha[1] > melhorValor) {
+                melhorPosicao = melhoresEscolha[0];
+                melhorValor = melhoresEscolha[1];
+            }
+        }
+        tabuleiro[melhorPosicao] = 'O';
         return false;
     }
-
-    @Override
-    public boolean bloquearPosicaoComChanceDePerto(char[] tabuleiro) {
-        return false;
-    }
-
-    @Override
-    public char[] escolherMelhorPosicao(char[] tabuleiro) {
-        return tabuleiro;
-    }
-
+    
     public int[] getPosicoesVagas(char[] tabuleiro) {
         int[] posicoesVagasTemp = new int[9];
         int controle = 0;
