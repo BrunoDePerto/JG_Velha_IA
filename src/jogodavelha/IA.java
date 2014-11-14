@@ -51,11 +51,6 @@ public class IA extends MiniMax implements Regras {
         //Executa o minimax
         int[][] melhoresEscolhas
                 = miniMax(this.tabuleiro, posicoesVagas);
-//        for(int[]melhorOpcao : melhoresEscolhas){
-//            System.out.println("Posicao: " + melhorOpcao[0] 
-//                    + ", melhorEscolha: " + melhorOpcao[1]
-//                    + ", piorEscolha: " + melhorOpcao[2]);
-//        }
         //Verifica se pode ganhar
         if(verificarSePodeGanhar(this.tabuleiro, melhoresEscolhas)){
             System.out.println("Ganhou");
