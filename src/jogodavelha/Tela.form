@@ -150,7 +150,7 @@
                                       <Component id="jbL1C1" min="-2" pref="62" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jbL2C1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jbL2C2" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Component id="jbL2C3" alignment="0" max="32767" attributes="0"/>
@@ -179,10 +179,10 @@
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jbL3C1" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jbL3C2" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
                               <Component id="jbL3C3" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
+                              <Component id="jbL3C1" min="-2" pref="65" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jlVencedorDaPartida" min="-2" pref="23" max="-2" attributes="0"/>
