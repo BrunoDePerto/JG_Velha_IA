@@ -19,8 +19,8 @@ public class IA extends MiniMax implements Regras {
         setNovoJogo(false);
         char tabuleiroPar[] = {
             'X', 'X', 'O', 
-            ' ', ' ', 'X', 
-            ' ', 'O', ' '};
+            ' ', ' ', ' ', 
+            'O', 'O', ' '};
         tabuleiroPar = efetuarJogada(tabuleiroPar);
         for (int i = 0; i < tabuleiroPar.length; i++) {
             System.out.print(tabuleiroPar[i] + " ");
