@@ -7,45 +7,36 @@ public class IA extends MiniMax implements Regras {
     private int nosAberto;
     private int totalNosAberto;
     private String ganhador;
-    private boolean novoJogo;
+    private boolean primeiroJogar;
 
     public IA() {
         tabuleiro = new char[9];
-        novoJogo = true;
+        primeiroJogar = true;
         poda = false;
-    }
-
-    public void teste() {
-        setNovoJogo(false);
-        char tabuleiroPar[] = {
-            'X', 'X', 'O', 
-            ' ', ' ', ' ', 
-            'O', 'O', ' '};
-        tabuleiroPar = efetuarJogada(tabuleiroPar);
-        for (int i = 0; i < tabuleiroPar.length; i++) {
-            System.out.print(tabuleiroPar[i] + " ");
-            if (i == 2 || i == 5) {
-                System.out.println("");
-            }
-        }
     }
 
     @Override
     public char[] efetuarJogada(char tabuleiro[]) {
         this.tabuleiro = tabuleiro;
+        for(int i = 0; i < tabuleiro.length; i++ ){
+            System.out.print(this.tabuleiro[i]+ " ");
+            if(i == 2 || i == 5 || i == 8)
+                System.out.println("");
+        }    
+        ganhador = "";
         //Verifica se é a primeira jogada e escolhe um dos melhores locais
-        if (novoJogo) {
+        if (primeiroJogar) {
             this.tabuleiro = novoJogo(tabuleiro);
         }
         //Verifica se perdeu
         if (verificarGanhador(this.tabuleiro, 'X')) {
-            System.out.println("Perdeu");
+            ganhador = "Jogador";
             return this.tabuleiro;
         }
         //Verifica as posicoes vagas
         int[] posicoesVagas = getPosicoesVagas(this.tabuleiro);
         if(posicoesVagas.length == 0){
-            System.out.println("Acabou as opcoes");
+            ganhador = "Empate";
             return this.tabuleiro;
         }
         //Executa o minimax
@@ -53,17 +44,15 @@ public class IA extends MiniMax implements Regras {
                 = miniMax(this.tabuleiro, posicoesVagas);
         //Verifica se pode ganhar
         if(verificarSePodeGanhar(this.tabuleiro, melhoresEscolhas)){
-            System.out.println("Ganhou");
+            ganhador = "Computador";
             return this.tabuleiro;
         }
         //Bloquear jogador
         if(bloquearJogador(this.tabuleiro, melhoresEscolhas)){
-            System.out.println("Perderia");
             return this.tabuleiro;
         }
         //jogar na melhor posicao
         if(jogarNaMelhorPosicao(tabuleiro, melhoresEscolhas)){
-            System.out.println("Jogou na melhor opção");
             return this.tabuleiro;
         }
         return this.tabuleiro;
@@ -71,11 +60,11 @@ public class IA extends MiniMax implements Regras {
 
     @Override
     public char[] novoJogo(char tabuleiro[]) {
-        while (isNovoJogo()) {
+        while (primeiroJogar) {
             int i = getPrimeiraJogada();
             if (tabuleiro[i] == ' ') {
                 tabuleiro[i] = 'O';
-                setNovoJogo(false);
+                setPrimeiroJogar(false);
             }
         }
         return tabuleiro;
@@ -180,12 +169,9 @@ public class IA extends MiniMax implements Regras {
         return totalNosAberto;
     }
 
-    public boolean isNovoJogo() {
-        return novoJogo;
-    }
-
-    public void setNovoJogo(boolean novoJogo) {
-        this.novoJogo = novoJogo;
+    public void setPrimeiroJogar(boolean primeiroJogar) {
+        this.primeiroJogar = primeiroJogar;
+        this.tabuleiro = new char[9];
     }
 
 }
