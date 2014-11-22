@@ -26,47 +26,38 @@ public class Tela extends javax.swing.JFrame {
                 if(i == 0){
                     jbL1C1.setText("O");
                     jbL1C1.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 1){
                     jbL1C2.setText("O");
                     jbL1C2.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 2){
                     jbL1C3.setText("O");
                     jbL1C3.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 3){
                     jbL2C1.setText("O");
                     jbL2C1.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 4){
                     jbL2C2.setText("O");
                     jbL2C2.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 5){
                     jbL2C3.setText("O");
                     jbL2C3.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 6){
                     jbL3C1.setText("O");
                     jbL3C1.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 7){
                     jbL3C2.setText("O");
                     jbL3C2.setEnabled(false);
-                    verificarEmpate();
                 }
                 if(i == 8){
                     jbL3C3.setText("O");
                     jbL3C3.setEnabled(false);
-                    verificarEmpate();
                 }
             }
         }
@@ -84,7 +75,25 @@ public class Tela extends javax.swing.JFrame {
         jlTempoDeJogadaPC.setText(String.valueOf(new DecimalFormat("0.000").format(result/1000)));      
         jlNosAbertos.setText(String.valueOf(ia.getNosAberto()));
         jlTotNosAbertos.setText(String.valueOf(ia.getTotalNosAberto()));
-        jlVencedorDaPartida.setText(ia.getGanhador());
+        
+		verificaGanhador();     
+    }
+	
+	 void verificaGanhador(){
+        //System.out.println(ia.getGanhador());
+        if(ia.getGanhador().equals("Jogador") || ia.getGanhador().equals("Computador")){
+            jlVencedorDaPartida.setText(ia.getGanhador());
+            
+            jbL1C1.setEnabled(false);
+            jbL1C2.setEnabled(false);
+            jbL1C3.setEnabled(false);
+            jbL2C1.setEnabled(false);
+            jbL2C2.setEnabled(false);
+            jbL2C3.setEnabled(false);
+            jbL3C1.setEnabled(false);
+            jbL3C2.setEnabled(false);
+            jbL3C3.setEnabled(false);
+        }
     }
       
     @SuppressWarnings("unchecked")
@@ -519,6 +528,7 @@ public class Tela extends javax.swing.JFrame {
         if(jrbComputador.isSelected()){
             ia.setPrimeiroJogar(true);
             tabujogada = ia.efetuarJogada(tabujogada);
+            jogaPc();
         } else {
             ia.setPrimeiroJogar(false);
         }
