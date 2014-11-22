@@ -1,16 +1,17 @@
 package jogodavelha;
 
 import javax.swing.JOptionPane;
+import java.text.DecimalFormat;
 
 public class Tela extends javax.swing.JFrame {
 
+    private IA ia;
     /**
      * Creates new form Tela
      */
     public Tela() {
         initComponents();
         IA ia = new IA();
-        ia.teste();
     }
 
     @SuppressWarnings("unchecked")
