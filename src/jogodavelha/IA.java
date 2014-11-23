@@ -18,15 +18,11 @@ public class IA extends MiniMax implements Regras {
     @Override
     public char[] efetuarJogada(char tabuleiro[]) {
         this.tabuleiro = tabuleiro;
-        for(int i = 0; i < tabuleiro.length; i++ ){
-            System.out.print(this.tabuleiro[i]+ " ");
-            if(i == 2 || i == 5 || i == 8)
-                System.out.println("");
-        }    
         ganhador = "";
         //Verifica se é a primeira jogada e escolhe um dos melhores locais
         if (primeiroJogar) {
             this.tabuleiro = novoJogo(tabuleiro);
+            return this.tabuleiro;
         }
         //Verifica se perdeu
         if (verificarGanhador(this.tabuleiro, 'X')) {
@@ -89,7 +85,7 @@ public class IA extends MiniMax implements Regras {
     
     @Override
     public boolean verificarSePodeGanhar(char[] tabuleiro, int[][] melhoresEscolhas){
-        int melhorValor = 0, melhorPosicao = 0;
+        int melhorValor = -1000, melhorPosicao = -1000;
         for (int[] melhoresEscolha : melhoresEscolhas) {
             if (melhoresEscolha[1] > melhorValor) {
                 melhorPosicao = melhoresEscolha[0];
