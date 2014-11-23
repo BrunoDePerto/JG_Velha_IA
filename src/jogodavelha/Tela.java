@@ -419,7 +419,8 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(726, 398));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbL1C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbL1C1ActionPerformed
