@@ -64,7 +64,6 @@ public class Tela extends javax.swing.JFrame {
     }
     
     void fazerJogada(int posicao){
-        //calculando tempo da jogada
         tempo1 = System.currentTimeMillis();
         tabujogada[posicao] = 'X';
         tabujogada = ia.efetuarJogada(tabujogada);
@@ -80,7 +79,6 @@ public class Tela extends javax.swing.JFrame {
     }
 	
 	 void verificaGanhador(){
-        //System.out.println(ia.getGanhador());
         if(ia.getGanhador().equals("Jogador") || ia.getGanhador().equals("Computador")){
             jlVencedorDaPartida.setText(ia.getGanhador());
             

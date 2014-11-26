@@ -3,8 +3,6 @@ package jogodavelha;
 public class IA extends MiniMax implements Regras {
 
     private char tabuleiro[];
-    private boolean poda;
-    
     private String ganhador;
     private boolean primeiroJogar;
 

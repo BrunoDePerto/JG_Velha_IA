@@ -9,8 +9,10 @@ public abstract class MiniMax {
             = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
             {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
             {0, 4, 8}, {2, 4, 6}};
-    protected int nosAberto;
+    protected int nosAberto, nosPoda;
     protected int totalNosAberto;
+    private int alpha, beta;
+    protected boolean poda;
 
     public int getPrimeiraJogada() {
         int max = primeiraJogada.length - 1;
@@ -26,18 +28,36 @@ public abstract class MiniMax {
     public int[][] miniMax(char[] tabuleiro, int[] posicoesVagas) {
         int[][] melhoresEscolhas
                 = new int[posicoesVagas.length][3];
+        alpha = -1000;
+        beta = 1000;
         nosAberto = 0;
         for (int i = 0; i < melhoresEscolhas.length; i++) {
             melhoresEscolhas[i][0] = posicoesVagas[i];
             melhoresEscolhas[i][1] = miniMax(tabuleiro, posicoesVagas[i], 0, 0, 'O');
+            if(poda && alpha < melhoresEscolhas[i][1]){
+                alpha = melhoresEscolhas[i][1];
+                totalNosAberto += nosPoda;
+                nosAberto += nosPoda;
+            }
             melhoresEscolhas[i][2] = miniMax(tabuleiro, posicoesVagas[i], 0, 0, 'X');
+            if(poda && beta > melhoresEscolhas[i][2]){
+                beta = melhoresEscolhas[i][2];
+                totalNosAberto += nosPoda;
+                nosAberto += nosPoda;
+            }
+            nosPoda = 0;
         }
-        totalNosAberto += nosAberto;
+        if(!poda) {
+                totalNosAberto += nosAberto;
+            }
         return melhoresEscolhas;
     }
 
     public int miniMax(char[] tabuleiro, int posicao, int opcao, int valor, char jogador) {
-        nosAberto++;
+        if(!poda){
+            nosAberto++;
+        }
+        nosPoda++;
         int valorTemp = 0;
         if (opcao == posicoesGanhadoras.length) {
             return valor;
