@@ -4,8 +4,7 @@ public class IA extends MiniMax implements Regras {
 
     private char tabuleiro[];
     private boolean poda;
-    private int nosAberto;
-    private int totalNosAberto;
+    
     private String ganhador;
     private boolean primeiroJogar;
 
@@ -13,6 +12,7 @@ public class IA extends MiniMax implements Regras {
         tabuleiro = new char[9];
         primeiroJogar = true;
         poda = false;
+        totalNosAberto = 0;
     }
 
     @Override
@@ -161,6 +161,10 @@ public class IA extends MiniMax implements Regras {
         return ganhador;
     }
 
+    public void setTotalNosAberto(int totalNosAberto) {
+        this.totalNosAberto = totalNosAberto;
+    }
+    
     public int getTotalNosAberto() {
         return totalNosAberto;
     }

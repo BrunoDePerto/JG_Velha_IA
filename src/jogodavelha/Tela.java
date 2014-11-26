@@ -577,6 +577,7 @@ public class Tela extends javax.swing.JFrame {
         jlTempoDeJogadaPC.setText("0,00");
         jlNosAbertos.setText("0");
         jlTotNosAbertos.setText("0");
+        ia.setTotalNosAberto(0);
         tempo1 = tempo2 = result = 0;
         
     }//GEN-LAST:event_jbReiniciarPartidaActionPerformed
