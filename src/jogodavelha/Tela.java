@@ -64,13 +64,13 @@ public class Tela extends javax.swing.JFrame {
     }
     
     void fazerJogada(int posicao){
-        tempo1 = System.currentTimeMillis();
+        tempo1 = System.nanoTime();
         tabujogada[posicao] = 'X';
         tabujogada = ia.efetuarJogada(tabujogada);
         jogaPc();
-        tempo2 = System.currentTimeMillis();
-        result = tempo2 - tempo1;
-        System.out.println("O tempo da jogada é: " + String.valueOf(result) + " ms");
+        tempo2 = System.nanoTime();
+        result = (tempo2 - tempo1)/100;
+        //System.out.println("O tempo da jogada é: " + String.valueOf(result) + " ms");
         jlTempoDeJogadaPC.setText(String.valueOf(new DecimalFormat("0.000").format(result/1000)));      
         jlNosAbertos.setText(String.valueOf(ia.getNosAberto()));
         jlTotNosAbertos.setText(String.valueOf(ia.getTotalNosAberto()));
